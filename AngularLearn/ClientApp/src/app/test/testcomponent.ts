@@ -22,12 +22,25 @@ export class TestComponent {
   }
 
   ngOnInit() {
-    var functionName: string = "ngOnChanges";
-    let baseFunction = this.ngSelectElement[functionName] as Function;
-    this.ngSelectElement[functionName] = function (...params: any[]) {
-      baseFunction.apply(this, params);
-      console.log(params);
-    };
+    [
+      "ngOnInit",
+      "ngOnChanges",
+      "ngDoCheck",
+      "ngAfterContentInit",
+      "ngAfterContentChecked",
+      "ngAfterViewInit",
+      "ngAfterViewChecked",
+      "ngOnDestroy"
+    ].forEach((functionName: string) => {
+      let baseFunction = this.ngSelectElement[functionName] as Function;
+      this.ngSelectElement[functionName] = function (...params: any[]) {
+        baseFunction.apply(this, params);
+        console.log({
+          function: functionName,
+          params: params
+        });
+      };
+    });
   }
 }
 
