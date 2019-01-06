@@ -1,4 +1,4 @@
-import { Component, Inject, Input, EventEmitter, Output, ElementRef, ViewChild } from '@angular/core';
+import { Component, Inject, Input, EventEmitter, Output, ElementRef, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgSelectComponent } from '@ng-select/ng-select';
 
@@ -6,7 +6,13 @@ import { NgSelectComponent } from '@ng-select/ng-select';
   selector: 'testcomponent',
   templateUrl: './testcomponent.html'
 })
-export class TestComponent {
+export class TestComponent implements OnInit, OnDestroy {
+  ngOnDestroy(...params): void {
+    this.log(params);
+  }
+  ngOnInit(...params): void {
+    this.log(params);
+  }
   @ViewChild('ngSelectElement') ngSelectElement: NgSelectComponent;
   name = "Murat";
 
@@ -19,28 +25,6 @@ export class TestComponent {
   }
   log(...params: any[]) {
     console.log(params);
-  }
-
-  ngOnInit() {
-    [
-      "ngOnInit",
-      "ngOnChanges",
-      "ngDoCheck",
-      "ngAfterContentInit",
-      "ngAfterContentChecked",
-      "ngAfterViewInit",
-      "ngAfterViewChecked",
-      "ngOnDestroy"
-    ].forEach((functionName: string) => {
-      let baseFunction = this.ngSelectElement[functionName] as Function;
-      this.ngSelectElement[functionName] = function (...params: any[]) {
-        baseFunction.apply(this, params);
-        console.log({
-          function: functionName,
-          params: params
-        });
-      };
-    });
   }
 }
 

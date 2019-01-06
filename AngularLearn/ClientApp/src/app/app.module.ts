@@ -11,6 +11,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import * as test from './test/testcomponent';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { BoldDirective } from './directives/bold.directive';
 
 export const appRoutes = [
   { path: '', component: HomeComponent, pathMatch: 'full', title: 'Home' },
@@ -27,7 +28,8 @@ export const appRoutes = [
     CounterComponent,
     FetchDataComponent,
     test.TestComponent,
-    test.ChildComponent
+    test.ChildComponent,
+    BoldDirective
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
