@@ -12,6 +12,8 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import * as test from './test/testcomponent';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { BoldDirective } from './directives/bold.directive';
+import { PhonesMockService } from './services/phones-mock.service';
+import { LoggerService } from './services/logger.service';
 
 export const appRoutes = [
   { path: '', component: HomeComponent, pathMatch: 'full', title: 'Home' },
@@ -28,7 +30,6 @@ export const appRoutes = [
     CounterComponent,
     FetchDataComponent,
     test.TestComponent,
-    test.ChildComponent,
     BoldDirective
   ],
   imports: [
@@ -38,7 +39,7 @@ export const appRoutes = [
     RouterModule.forRoot(appRoutes),
     NgSelectModule
   ],
-  providers: [],
+  providers: [LoggerService, PhonesMockService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
