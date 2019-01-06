@@ -10,9 +10,10 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import * as test from './test/testcomponent';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 export const appRoutes = [
-  { path: '', component: HomeComponent, pathMatch: 'full', title:'Home' },
+  { path: '', component: HomeComponent, pathMatch: 'full', title: 'Home' },
   { path: 'counter', component: CounterComponent, title: 'Counter' },
   { path: 'fetch-data', component: FetchDataComponent, title: 'Fetch Data' },
   { path: 'test', component: test.TestComponent, title: 'Test Component' }
@@ -32,7 +33,8 @@ export const appRoutes = [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    NgSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

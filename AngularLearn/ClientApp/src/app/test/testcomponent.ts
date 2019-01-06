@@ -1,27 +1,33 @@
-import { Component, Inject, Input, EventEmitter, Output, ElementRef } from '@angular/core';
+import { Component, Inject, Input, EventEmitter, Output, ElementRef, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { NgSelectComponent } from '@ng-select/ng-select';
 
 @Component({
   selector: 'testcomponent',
   templateUrl: './testcomponent.html'
 })
 export class TestComponent {
+  @ViewChild('ngSelectElement') ngSelectElement: NgSelectComponent;
   name = "Murat";
-  dropdownValues: DropdownOption[] = [
-    {
-      label: "test",
-      value: "testID"
-    },
-    {
-      label: "test2",
-      value: "testID2"
-    },
-    {
-      label: "test3",
-      value: "testID3"
-    }
-  ];
+
+  dropdownValues: DropdownOption[] = [];
+
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+    for (var i = 0; i < 150; i++) {
+      this.dropdownValues.push({ value: i.toString(), label: "Test" + i });
+    }
+  }
+  log(...params: any[]) {
+    console.log(params);
+  }
+
+  ngOnInit() {
+    var functionName: string = "ngOnChanges";
+    let baseFunction = this.ngSelectElement[functionName] as Function;
+    this.ngSelectElement[functionName] = function (...params: any[]) {
+      baseFunction.apply(this, params);
+      console.log(params);
+    };
   }
 }
 
@@ -49,6 +55,7 @@ export class ChildComponent {
   valueChange = new EventEmitter<any>();
 
   select(value) {
+    console.log(this);
     this.valueChange.emit(value.value);
   }
 }

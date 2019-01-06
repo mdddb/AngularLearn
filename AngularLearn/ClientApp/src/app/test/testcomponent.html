@@ -1,5 +1,7 @@
 <h1 style="white-space:pre">{{Text || "test"}}</h1>
 
-<asd [options]="dropdownValues" [(value)]="name"></asd>
 <div>Выбранное имя: {{name}}</div>
+
+
+<ng-select #ngSelectElement [virtualScroll]="true" [items]="dropdownValues" bindValue="value" [(ngModel)]="name"></ng-select>
 <asd [options]="dropdownValues" [(value)]="name"></asd>
