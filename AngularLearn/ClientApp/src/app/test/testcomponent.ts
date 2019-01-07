@@ -10,15 +10,17 @@ import { LoggerService } from '../services/logger.service';
   templateUrl: './testcomponent.html',
   providers: []
 })
-export class TestComponent implements OnInit {
-  items: Phone[] = [];
-  constructor(private dataService: PhonesMockService) { }
-
-  addItem(name: string, price: number) {
-
-    this.dataService.addData(name, price);
-  }
-  ngOnInit() {
-    this.items = this.dataService.getData();
+export class TestComponent {
+  items: any[];
+  value: any;
+  constructor() {
+    let items = [];
+    for (let i = 1; i <= 20; i++) {
+      items.push({
+        ID: i.toString(),
+        Name: "test_" + i
+      });
+    }
+    this.items = items;
   }
 }

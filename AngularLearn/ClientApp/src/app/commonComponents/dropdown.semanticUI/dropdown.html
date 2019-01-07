@@ -1,0 +1,11 @@
+<div #dropdownElement class="ui selection dropdown" [class.disabled]="disabled">
+  <input type="hidden" [ngModel]="value" (change)="onHiddenValueFieldChange($event)">
+  <i class="dropdown icon"></i>
+  <div class="text"></div>
+  <div class="menu">
+    <ng-container *ngIf="DefaultText">
+      <div class="item" data-value>{{DefaultText}}</div>
+    </ng-container>
+    <div class="item" *ngFor="let option of options" attr.data-value="{{GetDataValue(option)}}" [textContent]="GetDataText(option)"></div>
+  </div>
+</div>

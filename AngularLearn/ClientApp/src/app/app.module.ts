@@ -14,6 +14,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { BoldDirective } from './directives/bold.directive';
 import { PhonesMockService } from './services/phones-mock.service';
 import { LoggerService } from './services/logger.service';
+import { DropdownComponent } from './commonComponents/dropdown.semanticUI/dropdown';
 
 export const appRoutes = [
   { path: '', component: HomeComponent, pathMatch: 'full', title: 'Home' },
@@ -30,7 +31,8 @@ export const appRoutes = [
     CounterComponent,
     FetchDataComponent,
     test.TestComponent,
-    BoldDirective
+    BoldDirective,
+    DropdownComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
