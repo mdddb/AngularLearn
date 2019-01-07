@@ -1,6 +1,8 @@
-<dropdown id="testID" [options]="items" dataValue="ID" dataText="Name" [(value)]="value"></dropdown>
+<dropdown #dropdown1 [options]="items" dataValue="ID" dataText="Name" [(value)]="value"></dropdown>
 
 <dropdown id="testID2" [options]="items" dataValue="ID" dataText="Name" [(value)]="value"></dropdown>
 
 
 <div>{{value}}</div>
+
+<div>{{(dropdown1.valueItem || {}).ID}}</div>

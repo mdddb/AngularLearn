@@ -10,10 +10,14 @@ declare var $: any;
 export class DropdownComponent implements OnInit, OnChanges, AfterViewInit {
   @ViewChild("dropdownElement") dropdownElement: ElementRef;
 
-  @Input() options: any[];
-  @Input() disabled: any;
-  @Input()
-  value: any;
+  @Input() options: any[]; @Input() disabled: any; @Input() value: any;
+
+  get valueItem() {
+    if (this.value)
+      return this.options.find(x => this.GetDataValue(x) == this.value);
+    else
+      return null;
+  }
 
   @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
 
