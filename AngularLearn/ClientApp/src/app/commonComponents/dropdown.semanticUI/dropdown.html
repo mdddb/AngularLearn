@@ -1,4 +1,4 @@
-<div #dropdownElement class="ui selection dropdown" [class.disabled]="disabled">
+<div #dropdownElement class="ui selection dropdown" [class.disabled]="disabled" [class.fluid]="fluid">
   <input type="hidden" [ngModel]="value" (change)="onHiddenValueFieldChange($event)">
   <i class="dropdown icon"></i>
   <div class="text"></div>

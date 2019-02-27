@@ -10,7 +10,7 @@ declare var $: any;
 export class DropdownComponent implements OnInit, OnChanges, AfterViewInit {
   @ViewChild("dropdownElement") dropdownElement: ElementRef;
 
-  @Input() options: any[]; @Input() disabled: any; @Input() value: any;
+  @Input() options: any[]; @Input() disabled: any; @Input() value: any; @Input() DefaultText: any; @Input() fluid: boolean;
 
   get valueItem() {
     if (this.value)
@@ -39,11 +39,17 @@ export class DropdownComponent implements OnInit, OnChanges, AfterViewInit {
   ngOnChanges(changes: SimpleChanges): void {
     let valueChange = changes.value;
     if (valueChange && valueChange.isFirstChange() != true && valueChange.currentValue != valueChange.previousValue) {
-      $(this.dropdownElement.nativeElement).dropdown("set selected", valueChange.currentValue);
+      if (valueChange.currentValue || this.DefaultText)
+        $(this.dropdownElement.nativeElement).dropdown("set selected", valueChange.currentValue);
+      else
+        $(this.dropdownElement.nativeElement).dropdown("clear");
     }
   }
   ngOnInit(): void {
     console.log("ngOnInit");
+    this.fluid = (this.fluid === undefined)
+      ? false
+      : this.fluid !== false;
   }
   ngAfterViewInit(): void {
     console.log("ngAfterViewInit");
