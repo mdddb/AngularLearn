@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -15,6 +15,9 @@ import { BoldDirective } from './directives/bold.directive';
 import { PhonesMockService } from './services/phones-mock.service';
 import { LoggerService } from './services/logger.service';
 import { DropdownComponent } from './commonComponents/dropdown.semanticUI/dropdown';
+import { AuthInterceptor } from './httpAuthInterceptor';
+import { HTTPLoaderDisplayInterceptor } from './httpLoaderDisplayInterceptor';
+import { LoaderComponent } from './commonComponents/loader/component';
 
 export const appRoutes = [
   { path: '', component: HomeComponent, pathMatch: 'full', title: 'Home' },
@@ -32,7 +35,8 @@ export const appRoutes = [
     FetchDataComponent,
     test.TestComponent,
     BoldDirective,
-    DropdownComponent
+    DropdownComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -41,7 +45,17 @@ export const appRoutes = [
     RouterModule.forRoot(appRoutes),
     NgSelectModule
   ],
-  providers: [LoggerService, PhonesMockService],
+  providers: [LoggerService, PhonesMockService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HTTPLoaderDisplayInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -23,8 +23,9 @@ namespace AngularLearn.Controllers
         }).ToList();
 
         [HttpGet("[action]")]
-        public IEnumerable<WeatherForecast> WeatherForecasts()
+        public async Task<IEnumerable<WeatherForecast>> WeatherForecasts()
         {
+            await Task.Delay(3000);
             return forecasts;
         }
         [HttpPost("[action]")]
