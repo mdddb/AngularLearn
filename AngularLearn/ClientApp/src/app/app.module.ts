@@ -18,6 +18,7 @@ import { DropdownComponent } from './commonComponents/dropdown.semanticUI/dropdo
 import { AuthInterceptor } from './httpAuthInterceptor';
 import { HTTPLoaderDisplayInterceptor } from './httpLoaderDisplayInterceptor';
 import { LoaderComponent } from './commonComponents/loader/component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export const appRoutes = [
   { path: '', component: HomeComponent, pathMatch: 'full', title: 'Home' },
@@ -43,7 +44,8 @@ export const appRoutes = [
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(appRoutes),
-    NgSelectModule
+    NgSelectModule,
+    BrowserAnimationsModule
   ],
   providers: [LoggerService, PhonesMockService,
     {
